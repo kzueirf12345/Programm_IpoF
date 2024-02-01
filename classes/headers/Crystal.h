@@ -15,8 +15,8 @@ class Crystal {
     Crystal(const Cell& cell, long long x_size, long long y_size, long long z_size,
             double pgu_size);
 
-    [[nodiscard]] const Cell& ElementaryCell() const { return cell; }
-    [[nodiscard]] Cell& ElementaryCell() { return cell; }
+    [[nodiscard]] const Cell& ElementaryCell() const noexcept { return cell; }
+    [[nodiscard]] Cell& ElementaryCell() noexcept { return cell; }
     [[nodiscard]] long long XSize() const noexcept { return x_size; }
     [[nodiscard]] long long YSize() const noexcept { return y_size; }
     [[nodiscard]] long long ZSize() const noexcept { return z_size; }
@@ -25,9 +25,14 @@ class Crystal {
     [[nodiscard]] std::vector<Atom>& Model() noexcept { return model; }
     [[nodiscard]] const std::vector<Coordinate>& Pgu() const noexcept { return pgu; }
     [[nodiscard]] std::vector<Coordinate>& Pgu() noexcept { return pgu; }
+    void Erase(size_t index);
+    void Insert(Coordinate coor);
+    void Offset(size_t index, Coordinate vector);
 
     void Modeling(size_t iterations_cnt);
-    double Energy() noexcept;
+    [[nodiscard]] double Energy() noexcept;
+
+    void UpdateModelVerle();
 
    private:
     long long x_size, y_size, z_size;
@@ -42,9 +47,8 @@ class Crystal {
     double time = 0;
     inline void CreateModel();
 
-    void UpdateModelVerle();
     void UpdateModelVerleTh(unsigned num);
     inline void FillVerle(Atom& coor);
 
-    inline double AtomSumOfPotential(const Atom& coor) noexcept;
+    [[nodiscard]] inline double AtomSumOfPotential(const Atom& coor) noexcept;
 };

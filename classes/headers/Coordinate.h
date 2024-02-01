@@ -19,6 +19,10 @@ struct Coordinate {
     bool operator!=(const Coordinate &other) const noexcept {
         return this->x != other.x || this->y != other.y || this->z != other.z;
     }
+    bool operator<(const Coordinate &other) const noexcept {
+        return this->x * this->x + this->y * this->y + this->z * this->z <
+               other.x * other.x + other.y * other.y + other.z * other.z;
+    }
 
     Coordinate operator+(const Coordinate &other) const noexcept {
         return Coordinate(this->x + other.x, this->y + other.y, this->z + other.z);
@@ -66,4 +70,4 @@ struct hash<Coordinate> {
                INT64_MAX;
     }
 };
-} 
+}  // namespace std

@@ -12,8 +12,8 @@ constexpr double PGU_THICKNESS = 3 * EQUAL_DIST;  // angstream
 constexpr double R_VERLE = 2 * EQUAL_DIST;        // angstream
 
 constexpr double MASS = 63.546;                      // aem
-constexpr double D = 5. * EV_TO_G * G_TO_MY * 1e-3;  // aem * andstream^2 / fs^2
-constexpr double k = 7.7 * KG_TO_AEM * 1e-4;         // aem * andstream^2 / fs^2
+constexpr double D = 5. * EV_TO_G * G_TO_MY * 1e-3;  // aem * angstream^2 / fs^2
+constexpr double k = 7.7 * KG_TO_AEM * 1e-4;         // aem * angstream^2 / fs^2
 constexpr double ALPHA = std::sqrt(k / (2 * D));
 constexpr double TAU = 0.1;  // fs
 

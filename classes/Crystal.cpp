@@ -1,5 +1,9 @@
 #include "headers/Crystal.h"
 
+/////////////////////////////////////////////////////////
+//// Construct
+/////////////////////////////////////////////////////////
+
 Crystal::Crystal(const Cell &cell, long long x_size, long long y_size, long long z_size,
                  double pgu_size)
     : cell(cell), x_size(x_size), y_size(y_size), z_size(z_size), pgu_size(pgu_size) {
@@ -301,6 +305,32 @@ void Crystal::FillVerle(Atom &atom) {
 }
 
 /////////////////////////////////////////////////////////
+//// Edit
+/////////////////////////////////////////////////////////
+
+void Crystal::Erase(size_t index) {
+    if (std::is_sorted(model.begin(), model.end())) {
+        model.erase(std::lower_bound(model.begin(), model.end(), model[index]));
+    } else {
+        model.erase(std::find(model.begin(), model.end(), model[index]));
+    }
+    UpdateModelVerle();
+}
+void Crystal::Insert(Coordinate coor)  // TODO check in set
+{
+    model.push_back(Atom(coor));
+    UpdateModelVerle();
+}
+void Crystal::Offset(size_t index, Coordinate vector) {
+    if (std::is_sorted(model.begin(), model.end())) {
+        std::lower_bound(model.begin(), model.end(), model[index])->Coor() += vector;
+    } else {
+        std::find(model.begin(), model.end(), model[index])->Coor() += vector;
+    }
+    UpdateModelVerle();
+}
+
+/////////////////////////////////////////////////////////
 //// Gradient
 /////////////////////////////////////////////////////////
 
@@ -327,10 +357,7 @@ void Crystal::Modeling(size_t iterations_cnt) {
     }
 }
 
-double Crystal::Energy() noexcept {
-    return 0.5 * D *
-           AtomSumOfPotential(model[model.size() / 2]);
-}
+double Crystal::Energy() noexcept { return 0.5 * D * AtomSumOfPotential(model[model.size() / 2]); }
 
 double Crystal::AtomSumOfPotential(const Atom &atom) noexcept {
     double sum = 0;

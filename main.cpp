@@ -22,12 +22,13 @@ int main() {
 
     const double first_energy = crystal.Energy();
 
-    crystal.Model()[crystal.Model().size() / 4].Coor() += Coordinate(EQUAL_DIST / 4, EQUAL_DIST / 4, EQUAL_DIST / 4);
+    crystal.Offset(crystal.Model().size() / 4,
+                   Coordinate(EQUAL_DIST / 4, EQUAL_DIST / 4, EQUAL_DIST / 4));
     crystal.Modeling(ITERATIONS_CNT);
 
     const double second_energy = crystal.Energy();
 
-    std::cout << "time of modeling\t" << crystal.Time() << std::endl;
+    std::cout << "time of modeling\t" << crystal.Time() << " фс" << std::endl;
     std::cout << "first energy\t" << first_energy << std::endl;
     std::cout << "second_energy\t" << second_energy << std::endl;
     std::cout << "difference\t" << first_energy - second_energy << std::endl;

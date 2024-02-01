@@ -18,6 +18,7 @@ struct Atom {
 
     bool operator==(const Atom &other) const noexcept { return this->coor == other.coor; }
     bool operator!=(const Atom &other) const noexcept { return this->coor != other.coor; }
+    bool operator<(const Atom &other) const noexcept { return this->coor < other.coor; }
 
     Coordinate SumOfFlows() const noexcept;
 
