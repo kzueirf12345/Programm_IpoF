@@ -24,6 +24,20 @@ int main() {
 
     crystal.Offset(crystal.Model().size() / 4,
                    Coordinate(EQUAL_DIST / 4, EQUAL_DIST / 4, EQUAL_DIST / 4));
+
+    std::ofstream fout("model.txt");
+    for (size_t i = 0; i < crystal.Model().size(); ++i) {
+        fout << crystal.Model()[i].Coor().x << " " << crystal.Model()[i].Coor().y << " "
+             << crystal.Model()[i].Coor().z << std::endl;
+    }
+    fout.close();
+    fout.open("pgu.txt");
+    for (size_t i = 0; i < crystal.Pgu().size(); ++i) {
+        fout << crystal.Pgu()[i].x << " " << crystal.Pgu()[i].y << " " << crystal.Pgu()[i].z
+             << std::endl;
+    }
+    fout.close();
+    
     crystal.Modeling(ITERATIONS_CNT);
 
     const double second_energy = crystal.Energy();
@@ -32,29 +46,6 @@ int main() {
     std::cout << "first energy\t" << first_energy << std::endl;
     std::cout << "second_energy\t" << second_energy << std::endl;
     std::cout << "difference\t" << first_energy - second_energy << std::endl;
-
-    std::ofstream fout("model.txt");
-
-    for (size_t i = 0; i < crystal.Model().size() - 1; ++i) {
-        fout << crystal.Model()[i].Coor().x << std::endl
-             << crystal.Model()[i].Coor().y << std::endl
-             << crystal.Model()[i].Coor().z << std::endl;
-    }
-    fout << crystal.Model()[crystal.Model().size() - 1].Coor().x << std::endl
-         << crystal.Model()[crystal.Model().size() - 1].Coor().y << std::endl
-         << crystal.Model()[crystal.Model().size() - 1].Coor().z;
-    fout.close();
-
-    fout.open("pgu.txt");
-    for (size_t i = 0; i < crystal.Pgu().size() - 1; ++i) {
-        fout << crystal.Pgu()[i].x << std::endl
-             << crystal.Pgu()[i].y << std::endl
-             << crystal.Pgu()[i].z << std::endl;
-    }
-    fout << crystal.Pgu()[crystal.Pgu().size() - 1].x << std::endl
-         << crystal.Pgu()[crystal.Pgu().size() - 1].y << std::endl
-         << crystal.Pgu()[crystal.Pgu().size() - 1].z;
-    fout.close();
 
     clock_t end = clock();
     double seconds = (double)(end - start) / CLOCKS_PER_SEC;
