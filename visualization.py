@@ -29,7 +29,7 @@ for string in fpgu:
 fig = plt.figure()
 ax = plt.axes(projection='3d')
 ax.scatter(xarr_cube, yarr_cube, zarr_cube, color="green")
-# ax.scatter(xarr_pgu, yarr_pgu, zarr_pgu, color="red")
+ax.scatter(xarr_pgu, yarr_pgu, zarr_pgu, color="red")
 ax.set_xlabel('X')
 ax.set_ylabel('Y')
 ax.set_zlabel('Z')

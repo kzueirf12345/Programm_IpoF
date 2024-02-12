@@ -336,7 +336,6 @@ void Crystal::Offset(size_t index, Coordinate vector) {
 
 void Crystal::Modeling(size_t iterations_cnt) {
     std::vector<Atom> cur_model(model);
-    long long freq = 5;  // simple number
     for (size_t i = 0; i < iterations_cnt; ++i) {
         std::vector<Atom> prev_model(std::move(cur_model));
         cur_model = model;
@@ -348,11 +347,9 @@ void Crystal::Modeling(size_t iterations_cnt) {
             model[j].Coor() =
                 cur_position.Coor() * 2. - prev_position.Coor() + acceleration * TAU * TAU;
         }
+        
+        UpdateModelVerle();
 
-        // update verle
-        if (i % freq == 0) {
-            UpdateModelVerle();
-        }
         time += TAU;
     }
 }

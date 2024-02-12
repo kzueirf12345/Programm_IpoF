@@ -15,8 +15,8 @@ constexpr double MASS = 63.546;                      // aem
 constexpr double D = 5. * EV_TO_G * G_TO_MY * 1e-3;  // aem * angstream^2 / fs^2
 constexpr double k = 7.7 * KG_TO_AEM * 1e-4;         // aem * angstream^2 / fs^2
 constexpr double ALPHA = std::sqrt(k / (2 * D));
-constexpr double TAU = 0.1;  // fs
+constexpr double TAU = 0.5;  // fs // 0.1
 
 constexpr unsigned CPU_CNT = 8;
 
-constexpr size_t ITERATIONS_CNT = 2000;
+constexpr size_t ITERATIONS_CNT = 500;
