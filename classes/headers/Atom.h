@@ -5,7 +5,7 @@
 #include "Constants.h"
 #include "Coordinate.h"
 
-struct Atom {
+class Atom {
    public:
     Atom(Coordinate coor) : coor(std::move(coor)) {}
     Atom(Coordinate coor, std::vector<Coordinate> verle)
@@ -20,13 +20,9 @@ struct Atom {
     bool operator!=(const Atom &other) const noexcept { return this->coor != other.coor; }
     bool operator<(const Atom &other) const noexcept { return this->coor < other.coor; }
 
-    Coordinate SumOfFlows() const noexcept;
-
    private:
     Coordinate coor;
     std::vector<Coordinate> verle;
 };
 
-double Potential(double distance) noexcept;
-double Flow(double distance) noexcept;
-double Forse(double distance) noexcept;
+//ты чмо <3
