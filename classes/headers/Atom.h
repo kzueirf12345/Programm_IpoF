@@ -5,7 +5,7 @@
 #include "Constants.h"
 #include "Coordinate.h"
 
-struct Atom {
+class Atom {
    public:
     Atom(Coordinate coor) : coor(std::move(coor)) {}
     Atom(Coordinate coor, std::vector<Coordinate> verle)
